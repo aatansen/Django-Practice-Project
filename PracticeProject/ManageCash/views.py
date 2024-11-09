@@ -38,8 +38,8 @@ def signin(request):
 
 @login_required
 def dashboard(request):
-    add_cash = AddCash.objects.all()
-    expense = Expense.objects.all()
+    add_cash = AddCash.objects.filter(user=request.user)
+    expense = Expense.objects.filter(user=request.user)
     # Combine and sort by datetime
     transactions = sorted(
         chain(add_cash, expense),
