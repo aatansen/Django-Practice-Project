@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login,logout
 from django.contrib.auth.decorators import login_required
+from itertools import chain
+from operator import attrgetter
+from django.db.models import Sum
 from .models import *
 from .forms import *
 
@@ -34,8 +37,29 @@ def signin(request):
     return render(request,'signin.html',context)
 
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    add_cash = AddCash.objects.all()
+    expense = Expense.objects.all()
+    # Combine and sort by datetime
+    transactions = sorted(
+        chain(add_cash, expense),
+        key=attrgetter('datetime'),
+        reverse=True
+    )
 
+    # Calculate total income and total expense
+    total_income = add_cash.aggregate(Sum('amount'))['amount__sum'] or 0
+    total_expense = expense.aggregate(Sum('amount'))['amount__sum'] or 0
+
+    # Calculate total balance
+    total_balance = total_income - total_expense
+
+    context = {
+        "transactions": transactions,
+        "total_balance": total_balance,
+        "total_income": total_income,
+        "total_expense": total_expense,
+    }
+    return render(request, 'dashboard.html', context)
 
 def signout(request):
     logout(request)
