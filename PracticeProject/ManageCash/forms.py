@@ -21,8 +21,14 @@ class AddCashForm(forms.ModelForm):
     class Meta:
         model = AddCash
         fields = ['source', 'datetime', 'amount', 'description']
+        widgets={
+            'datetime':forms.DateInput(attrs={'type':'date', 'class':'date-field'}),
+            }
 
 class ExpenseForm(forms.ModelForm):
     class Meta:
         model = Expense
         fields = ['description', 'amount', 'datetime']
+        widgets={
+            'datetime':forms.DateInput(attrs={'type':'date', 'class':'date-field'}),
+            }

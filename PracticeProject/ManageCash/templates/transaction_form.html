@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if 'add_cash' in request.path %}
+        Add Cash - Expense Tracker
+    {% else %}
+        Add Expense - Expense Tracker
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2 class="text-center mb-4">
+        {% if 'add_cash' in request.path %}
+            Add Cash
+        {% else %}
+            Add Expense
+        {% endif %}
+    </h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit" class="btn btn-primary w-100">
+            {% if 'add_cash' in request.path %}
+                Add Cash
+            {% else %}
+                Add Expense
+            {% endif %}
+        </button>
+    </form>
+</div>
+{% endblock %}

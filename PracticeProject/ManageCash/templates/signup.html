@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up - Expense Tracker{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2 class="text-center mb-4">Sign Up</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+    </form>
+    <p class="text-center mt-3">
+        Already have an account? <a href="{% url 'signin' %}">Sign In</a>
+    </p>
+</div>
+{% endblock %}

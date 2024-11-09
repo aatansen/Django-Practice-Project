@@ -36,7 +36,11 @@ def signin(request):
 def dashboard(request):
     return render(request, 'dashboard.html')
 
-@login_required
+
+def signout(request):
+    logout(request)
+    return redirect('signin')
+
 def profile_management(request):
     if request.method == 'POST':
         form = CustomUserChangeForm(request.POST, instance=request.user)
@@ -71,3 +75,5 @@ def add_expense(request):
     else:
         form = ExpenseForm()
     return render(request, 'transaction_form.html', {'form': form})
+
+
