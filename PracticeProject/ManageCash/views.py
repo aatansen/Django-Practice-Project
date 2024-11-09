@@ -36,6 +36,7 @@ def signin(request):
     }
     return render(request,'signin.html',context)
 
+@login_required
 def dashboard(request):
     add_cash = AddCash.objects.all()
     expense = Expense.objects.all()
@@ -65,6 +66,7 @@ def signout(request):
     logout(request)
     return redirect('signin')
 
+@login_required
 def profile_management(request):
     if request.method == 'POST':
         form = CustomUserChangeForm(request.POST, instance=request.user)
@@ -76,6 +78,7 @@ def profile_management(request):
 
     return render(request, 'profile_management.html', {'form': form})
 
+@login_required
 def add_cash(request):
     if request.method == 'POST':
         form = AddCashForm(request.POST)
@@ -88,6 +91,7 @@ def add_cash(request):
         form = AddCashForm()
     return render(request, 'transaction_form.html', {'form': form})
 
+@login_required
 def add_expense(request):
     if request.method == 'POST':
         form = ExpenseForm(request.POST)
