@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up - Cash management{% endblock %}
+
+{% block content %}
+<style>
+    .form-row label {
+        margin-bottom: 5px;
+        color: #666;
+        text-align: left;
+        font-weight: bold;
+        display: block;
+    }
+    
+    .form-row input, .form-row select, .form-row textarea {
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+        background-color: transparent;
+    }
+    
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+</style>
+<div class="form-container">
+    <h2 class="text-center mb-4">User Registration</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+            {{form}}
+
+        </div>
+        <button type="submit" class="btn btn-success w-100">Registration</button>
+    </form>
+    <p class="text-center mt-3">
+        Already have an account? <a href="{% url 'signin' %}">Sign In</a>
+    </p>
+</div>
+{% endblock %}

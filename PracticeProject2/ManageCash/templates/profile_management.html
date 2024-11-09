@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile Management - Expense Tracker{% endblock %}
+
+{% block content %}
+<style>
+    .form-row label {
+        margin-bottom: 5px;
+        color: #666;
+        text-align: left;
+        font-weight: bold;
+        display: block;
+    }
+    
+    .form-row input, .form-row select, .form-row textarea {
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+        background-color: transparent;
+    }
+    
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+</style>
+<div class="form-container">
+    <h2 class="text-center mb-4">Profile Management</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+            {{form}}
+
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Update Profile</button>
+    </form>
+</div>
+{% endblock %}
