@@ -27,14 +27,40 @@
         border-color: #007bff;
         outline: none;
     }
+    .profile-container {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .profile-details p {
+        font-size: 1.1rem;
+        color: #333;
+        margin-bottom: 12px;
+    }
+
+    .profile-details strong {
+        color: #495057;
+    }
+
+    h2 {
+        font-size: 2rem;
+        color: #333;
+    }
 </style>
 <div class="form-container">
     <h2 class="text-center mb-4">Profile Management</h2>
+    <div class="profile-details">
+        <p class="h5"><strong>Username:</strong> {{ user.username }}</p>
+        <p class="h5"><strong>Email:</strong> {{ user.email }}</p>
+    </div>
     <form method="POST">
         {% csrf_token %}
         <div class="form-row">
             {{form}}
-
         </div>
         <button type="submit" class="btn btn-primary w-100">Update Profile</button>
     </form>

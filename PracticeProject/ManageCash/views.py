@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login,logout
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from itertools import chain
 from operator import attrgetter
@@ -72,6 +73,7 @@ def profile_management(request):
         form = CustomUserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
+            update_session_auth_hash(request, form.user)
             return redirect('profile_management')
     else:
         form = CustomUserChangeForm(instance=request.user)
