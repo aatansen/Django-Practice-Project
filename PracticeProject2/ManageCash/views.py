@@ -69,15 +69,10 @@ def signout(request):
     return redirect('signin')
 
 def profile_management(request):
-    if request.method == 'POST':
-        form = CustomUserChangeForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect('profile_management')
-    else:
-        form = CustomUserChangeForm(instance=request.user)
+    current_user = request.user
+    user = CustomUser.objects.get(username=current_user)
 
-    return render(request, 'profile_management.html', {'form': form})
+    return render(request, 'profile_management.html', {'user': user})
 
 @login_required
 def add_cash(request):
